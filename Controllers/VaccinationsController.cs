@@ -29,6 +29,34 @@ namespace hadasimExe1new.Controllers
                           View(await _context.Vaccination.ToListAsync()) :
                           Problem("Entity set 'hadasimExe1newContext.Vaccination'  is null.");
         }
+
+        public async Task<IActionResult> Summary()
+        {
+            var summaryData = new Dictionary<string, object>();
+
+            // Count customers with no vaccinations
+            var unvaccinatedCustomersCount = await _context.Client
+                .CountAsync(c => !_context.Vaccination.Any(v => v.MemberId == c.Id));
+            summaryData["UnvaccinatedCustomersCount"] = unvaccinatedCustomersCount;
+
+            // Calculate the start date and end date of the last month
+            var startDate = DateTime.Today.AddMonths(-1).Date;
+            var endDate = DateTime.Today.Date;
+
+            // Retrieve all clients with sickness dates in the last month
+            var activePatientsInLastMonth = await _context.Client
+                .Where(c => c.DateOfSickness >= startDate && c.DateOfSickness <= endDate)
+                .ToListAsync();
+
+            // Group active patients by date of sickness in memory
+            var activePatientsByDate = activePatientsInLastMonth
+                .GroupBy(c => c.DateOfSickness.Value.Date)
+                .ToDictionary(g => g.Key.ToString("yyyy-MM-dd"), g => g.Count());
+            summaryData["ActivePatientsByDate"] = activePatientsByDate;
+
+            return View(summaryData);
+        }
+
         //Receives a client ID and returns the list of vaccinations related only to him
 
         public async Task<IActionResult> ViewVaccinations(int? id)
