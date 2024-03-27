@@ -1,0 +1,47 @@
+﻿@model IEnumerable<hadsimnew.Models.Vaccination>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateVaccination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MemberId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateVaccination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemberId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
