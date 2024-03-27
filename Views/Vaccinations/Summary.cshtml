@@ -4,7 +4,26 @@
     ViewData["Title"] = "Summary";
 }
 
-<h1>Summary</h1>
+<style>
+    h1 {
+        color: red;
+        font-size: 24px;
+    }
+
+    h2 {
+        color: red;
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div>
+    <h1>Summary</h1>
+</div>
 
 <div>
     <h2>Active Patients Each Day in the Last Month</h2>
@@ -13,7 +32,7 @@
 
 <div>
     <h2>Number of Clients without Vaccinations</h2>
-    <p>@Model["UnvaccinatedCustomersCount"]</p>
+    <p><strong>@Model["UnvaccinatedCustomersCount"]</strong> clients have not received any vaccinations.</p>
 </div>
 
 @section Scripts {
@@ -22,16 +41,23 @@
         // Get data for active patients by date
         var activePatientsByDate = @Html.Raw(Json.Serialize(Model["ActivePatientsByDate"]));
 
-        // Convert data to arrays for chart
-        var dates = Object.keys(activePatientsByDate);
-        var counts = Object.values(activePatientsByDate);
+        // Create array of dates for the last month
+        var lastMonthDates = [];
+        var currentDate = new Date();
+        for (var i = 0; i < 30; i++) {
+            var date = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - i);
+            lastMonthDates.unshift(date.toISOString().split('T')[0]);
+        }
+
+        // Fill in counts for missing dates
+        var counts = lastMonthDates.map(date => activePatientsByDate[date] || 0);
 
         // Create chart
         var ctx = document.getElementById('activePatientsChart').getContext('2d');
         var activePatientsChart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: dates,
+                labels: lastMonthDates,
                 datasets: [{
                     label: 'Active Patients',
                     data: counts,
@@ -43,7 +69,10 @@
             options: {
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
                     }
                 }
             }
