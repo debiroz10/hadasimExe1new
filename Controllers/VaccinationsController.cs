@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using hadasimExe1new.Data;
 using hadsimnew.Models;
 using System.Reflection.PortableExecutable;
+using hadasimExe1new.Models;
 
 namespace hadasimExe1new.Controllers
 {
@@ -28,6 +29,7 @@ namespace hadasimExe1new.Controllers
                           View(await _context.Vaccination.ToListAsync()) :
                           Problem("Entity set 'hadasimExe1newContext.Vaccination'  is null.");
         }
+        //Receives a client ID and returns the list of vaccinations related only to him
 
         public async Task<IActionResult> ViewVaccinations(int? id)
         {
@@ -96,12 +98,14 @@ namespace hadasimExe1new.Controllers
                 var vacine = _context.Vaccination.Where(v => v.MemberId == vaccination.MemberId).ToList();
                 if (vacine.Count() >= 4)
                 {
-                    return BadRequest("Cannot add more than 4 vaccinations");
+                    ModelState.AddModelError("DateVaccination", "The new date cannot be earlier than existing vaccination dates.");
+                    return View(vaccination);
                 }
                 var lastVacine = vacine.OrderByDescending(v => v.DateVaccination).FirstOrDefault();
                 if (lastVacine != null && lastVacine.DateVaccination > vaccination.DateVaccination)
                 {
-                    return BadRequest("The date is wrong");
+                    ModelState.AddModelError("DateVaccination", "There is no possibility of more than four vaccinations per client");
+                    return View(vaccination);
                 }
                 _context.Add(vaccination);
 
@@ -127,9 +131,6 @@ namespace hadasimExe1new.Controllers
             return View(vaccination);
         }
 
-        // POST: Vaccinations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("id,DateVaccination,manufacturer,MemberId")] Vaccination vaccination)
@@ -141,10 +142,28 @@ namespace hadasimExe1new.Controllers
 
             if (ModelState.IsValid)
             {
+                // Retrieve existing vaccinations for the same member
+                var existingVaccinations = await _context.Vaccination
+                                                        .Where(v => v.MemberId == vaccination.MemberId && v.id != id)
+                                                        .OrderBy(v => v.DateVaccination)
+                                                        .ToListAsync();
+
+                // Check if the new date conflicts with existing dates
+                foreach (var existingVaccination in existingVaccinations)
+                {
+                    if (vaccination.DateVaccination < existingVaccination.DateVaccination)
+                    {
+                        ModelState.AddModelError("DateVaccination", "The new date cannot be earlier than existing vaccination dates.");
+                        return View(vaccination);
+                    }
+                }
+
+                // Save changes if no conflicts found
                 try
                 {
                     _context.Update(vaccination);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -157,10 +176,11 @@ namespace hadasimExe1new.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
+
             return View(vaccination);
         }
+
 
         // GET: Vaccinations/Delete/5
         public async Task<IActionResult> Delete(int? id)

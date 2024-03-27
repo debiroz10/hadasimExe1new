@@ -1,102 +1,46 @@
 ﻿@model IEnumerable<hadasimExe1new.Models.Client>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Client";
+}
+@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
-<h1>Index</h1>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="ml-55">
+    <p style="font-size: larger;">
+        <a asp-action="Create" style="color: red;">Click here to create a new Client</a>
+    </p>
+</div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.firstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.lastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.adress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.city)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.numAdress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfBirth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.mobilePhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfSickness)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfRecovery)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-           @*  <th>
-                <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
-                    <img class="rounded-circle w-100 h-100" src="@model.ImageUrl" style="object-fit: cover;">
-                </div>
-            </th> *@
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.firstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.adress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.city)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.numAdress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.mobilePhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfSickness)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfRecovery)
-            </td>
-                <td>
-                    <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
-                        <img class="rounded-circle w-100 h-100" src="@item.ImageUrl" style="object-fit: cover;">
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-6 mb-4 pb-2">
+                    <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3">
+
+                        <div class="position-relative rounded-circle mt-n3 mb-4 p-3 bg-secondary" style="width: 150px; height: 150px;">
+                            <img class="rounded-circle w-100 h-100" src="@item.ImageUrl" style="object-fit: cover;">
+                        </div>
+                        <h5 class="font-weight-bold mb-4">@item.firstName</h5>
+                        <h5 class="font-weight-bold mb-4">@item.lastName</h5>
+
+                        <div>
+                            <a asp-action="Edit" asp-route-id="@item.Id" style="color: red;">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id" style="color: red;">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id" style="color: red;">Delete</a>
+                        </div>
+
                     </div>
-                </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

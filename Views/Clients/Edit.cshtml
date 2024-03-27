@@ -1,7 +1,5 @@
 ﻿@model hadasimExe1new.Models.Client
-@* @{
-    Layout = "~/Views/Shared/_HomeLayout.cshtml";
-} *@
+
 @{
     ViewData["Title"] = "Edit";
 }
@@ -70,26 +68,21 @@
                 <input asp-for="ImageUrl" class="form-control" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
-         @*    <div>
-                <a asp-action="Create" asp-controller="Vaccinations" asp-route-memberId="@Model.Id">Add Vaccine</a>
+            <div>
+                <a href="@Url.Action("Create", "Vaccinations", new { memberId = Model.Id })" class="btn btn-danger">Add Vaccine</a>
             </div>
-            <form asp-action="Create" asp-controller="Vaccinations" method="get">
-                <input type="hidden" name="clientId" value="@Model.Id" />
-                <button type="submit" class="btn btn-primary">Add Vaccine</button>
-            </form>
- *@
-            <a href="@Url.Action("Create", "Vaccinations", new { memberId = Model.Id })">Add Vaccine</a>
 
 
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-danger" />
             </div>
+
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" style="color: red;">Back to List</a>
 </div>
 
 @section Scripts {

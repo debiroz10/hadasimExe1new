@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<hadsimnew.Models.Vaccination>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Vaccinations";
 }
 @{
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
-<h1>Index</h1>
+
 
 
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" style="color: red;">Create New</a>
 </p>
 <table class="table">
 
@@ -38,10 +38,11 @@
             </td>
          
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.id" style="color: red;">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.id" style="color: red;">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id" style="color: red;">Delete</a>
             </td>
+
         </tr>
 }
     </tbody>

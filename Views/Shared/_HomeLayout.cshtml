@@ -20,20 +20,58 @@
 
     <!-- Custom CSS -->
     <link href="~/css/style.css" rel="stylesheet">
+
+    <style>
+        /* Custom CSS for specific modifications */
+        .page-header {
+            background-image: img:src('~/img/Corona.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adding a text shadow for better readability */
+        }
+
+        .bg-primary {
+            background-color: #f08080 !important; /* Changing the topbar background color to weak red */
+        }
+
+        .display-4 {
+            font-family: 'Poppins', sans-serif; /* Applying Google Font 'Poppins' to the header text */
+        }
+
+        .text-danger, .text-secondary {
+            font-weight: 600; /* Making the text bold for better emphasis */
+        }
+    </style>
 </head>
 <body>
-    <!-- Topbar -->
+    <!-- Topbar Start -->
     <div class="container-fluid bg-primary py-3 d-none d-md-block">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <a href="@Url.Action("Index", "Home")" class="text-white px-3">Home</a>
-                    <a href="@Url.Action("Index", "Clients")" class="text-white px-3">Clients</a>
+                <div class="col-md-6 text-center text-lg-right">
+                    <div class="d-inline-flex align-items-center">
+                        <a class="text-white px-3" href="https://bit.ly/sai4ull">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-white px-3" href="~/">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-white px-3" href="~/">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-white px-3" href="~/">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="text-white pl-3" href="~/">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Topbar -->
+    <!-- Topbar End -->
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow">
         <div class="container-lg">
@@ -51,6 +89,9 @@
                     <li class="nav-item">
                         <a href="@Url.Action("Index", "Clients")" class="nav-link">Clients</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Summary", "Vaccinations")" class="nav-link">Summary</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -59,7 +100,7 @@
     <!-- Header -->
     <div class="jumbotron jumbotron-fluid page-header">
         <div class="container text-center py-5">
-            <h1 class="text-white display-3"><span class="text-danger">CORONA</span> <span class="text-secondary">TIME</span></h1>
+            <h1 class="text-white display-4"><span class="text-danger">CORONA</span> <span class="text-secondary">TIME</span></h1>
             <div class="d-inline-flex align-items-center text-white">
                 <p class="m-0"><a class="text-white" href="~/Home/Index">Home</a></p>
                 <i class="fa fa-circle px-3"></i>
@@ -67,7 +108,7 @@
             </div>
         </div>
     </div>
-    <!-- End Header -->
+
     <!-- Main Content -->
     <div class="container">
         @RenderBody()
@@ -92,3 +133,4 @@
     <script src="~/js/main.js"></script>
 </body>
 </html>
+
