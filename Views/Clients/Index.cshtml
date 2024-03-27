@@ -6,9 +6,7 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -45,6 +43,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.ImageUrl)
             </th>
+           @*  <th>
+                <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
+                    <img class="rounded-circle w-100 h-100" src="@model.ImageUrl" style="object-fit: cover;">
+                </div>
+            </th> *@
             <th></th>
         </tr>
     </thead>
@@ -81,9 +84,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateOfRecovery)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
+                <td>
+                    <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
+                        <img class="rounded-circle w-100 h-100" src="@item.ImageUrl" style="object-fit: cover;">
+                    </div>
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

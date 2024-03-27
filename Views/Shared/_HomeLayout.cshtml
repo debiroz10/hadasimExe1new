@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - CORONA TIME</title>
+
+    <!-- Favicon -->
+    <link href="~/img/favicon.ico" rel="icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Topbar -->
+    <div class="container-fluid bg-primary py-3 d-none d-md-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <a href="@Url.Action("Index", "Home")" class="text-white px-3">Home</a>
+                    <a href="@Url.Action("Index", "Clients")" class="text-white px-3">Clients</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Topbar -->
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow">
+        <div class="container-lg">
+            <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                <h1 class="m-0 display-4 text-primary"><span class="text-danger">CORONA</span> <span class="text-secondary">TIME</span></h1>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Home")" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="@Url.Action("Index", "Clients")" class="nav-link">Clients</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <!-- Header -->
+    <div class="jumbotron jumbotron-fluid page-header">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3"><span class="text-danger">CORONA</span> <span class="text-secondary">TIME</span></h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="~/Home/Index">Home</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">@ViewData["Title"]</p>
+            </div>
+        </div>
+    </div>
+    <!-- End Header -->
+    <!-- Main Content -->
+    <div class="container">
+        @RenderBody()
+    </div>
+    <!-- End Main Content -->
+    <!-- Footer -->
+    <div class="container-fluid footer bg-light py-5">
+        <div class="container text-center py-5">
+            <p>&copy; 2024 Your Company. All Rights Reserved.</p>
+        </div>
+    </div>
+    <!-- End Footer -->
+    <!-- Back to Top button -->
+    <a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="~/js/main.js"></script>
+</body>
+</html>
