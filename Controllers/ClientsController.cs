@@ -27,6 +27,7 @@ namespace hadasimExe1new.Controllers
                           Problem("Entity set 'hadasimExe1newContext.Client'  is null.");
         }
 
+
         // GET: Clients/Details/5
         public async Task<IActionResult> Details(int? id)
         {

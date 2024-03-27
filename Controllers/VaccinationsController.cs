@@ -23,10 +23,32 @@ namespace hadasimExe1new.Controllers
         // GET: Vaccinations
         public async Task<IActionResult> Index()
         {
+            
               return _context.Vaccination != null ? 
                           View(await _context.Vaccination.ToListAsync()) :
                           Problem("Entity set 'hadasimExe1newContext.Vaccination'  is null.");
         }
+
+        public async Task<IActionResult> ViewVaccinations(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var client = await _context.Client.FirstOrDefaultAsync(m => m.Id == id);
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            var vaccinations = await _context.Vaccination
+                                                .Where(v => v.MemberId == client.Id)
+                                                .ToListAsync();
+
+            return View("Index", vaccinations);
+        }
+
 
         // GET: Vaccinations/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -84,7 +106,7 @@ namespace hadasimExe1new.Controllers
                 _context.Add(vaccination);
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Edit", "Clients", new { id = vaccination.id });
+                return RedirectToAction("Edit", "Clients", new { id = vaccination.MemberId });
             }
             return View(vaccination);
         }

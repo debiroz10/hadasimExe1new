@@ -3,9 +3,9 @@
 @{
     ViewData["Title"] = "Details";
 }
-@{
+@* @{
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
-}
+} *@
 <h1>Details</h1>
 
 <div>
@@ -80,6 +80,11 @@
         </dd>
     </dl>
 </div>
+<!-- Button to view vaccinations -->
+<div>
+    <a asp-action="ViewVaccinations" asp-controller="Vaccinations" asp-route-id="@Model.Id" class="btn btn-primary">View Vaccinations</a>
+</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

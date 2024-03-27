@@ -1,21 +1,20 @@
 ﻿@model hadsimnew.Models.Vaccination
-
+@* @{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+} *@
 @{
     ViewData["Title"] = "Create";
 }
 
 <h1>Create</h1>
-@{
-    Layout = "~/Views/Shared/_HomeLayout.cshtml";
-}
+
 <h4>Vaccination</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           @* 
-           <input type="hidden" asp-for="MemberId" value="@ViewBag.MemberId" /> *@
+         
             <input type="hidden" asp-for="MemberId" value="@ViewData["MemberId"]" />
 
             <div class="form-group">
