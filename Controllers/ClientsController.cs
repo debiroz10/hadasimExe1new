@@ -143,16 +143,21 @@ namespace hadasimExe1new.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Client == null)
-            {
-                return Problem("Entity set 'hadasimExe1newContext.Client'  is null.");
-            }
             var client = await _context.Client.FindAsync(id);
-            if (client != null)
+            if (client == null)
             {
-                _context.Client.Remove(client);
+                return NotFound();
             }
-            
+
+            // Find vaccines associated with the client and delete them
+            var vaccines = await _context.Vaccination.Where(v => v.MemberId == id).ToListAsync();
+            if (vaccines.Any())
+            {
+                _context.Vaccination.RemoveRange(vaccines);
+            }
+
+            _context.Client.Remove(client);
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

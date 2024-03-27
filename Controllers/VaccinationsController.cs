@@ -30,6 +30,7 @@ namespace hadasimExe1new.Controllers
                           Problem("Entity set 'hadasimExe1newContext.Vaccination'  is null.");
         }
 
+
         public async Task<IActionResult> Summary()
         {
             var summaryData = new Dictionary<string, object>();

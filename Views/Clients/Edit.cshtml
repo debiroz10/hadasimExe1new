@@ -80,7 +80,12 @@
         </form>
     </div>
 </div>
-
+<!-- Button to view vaccinations -->
+<div>
+    <form asp-action="ViewVaccinations" asp-controller="Vaccinations" asp-route-id="@Model.Id" method="get">
+        <button type="submit" class="btn btn-danger">View Vaccinations</button>
+    </form>
+</div>
 <div>
     <a asp-action="Index" style="color: red;">Back to List</a>
 </div>
