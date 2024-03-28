@@ -32,6 +32,7 @@ The system assumes a simplistic model where each member has a single record for 
 Currently the number of vaccinations is limited to a maximum of four vaccinations per person.
 I assumed that the way the vaccines are inserted is according to the order they were received,
  so tests were added during the creation of the vaccine if the current date is not earlier than the existing date.
+ I have added a requirements overview document found within WWROOT.
 
  
 client side
