@@ -127,7 +127,7 @@ namespace hadasimExe1new.Controllers
                 var vacine = _context.Vaccination.Where(v => v.MemberId == vaccination.MemberId).ToList();
                 if (vacine.Count() >= 4)
                 {
-                    ModelState.AddModelError("DateVaccination", "The new date cannot be earlier than existing vaccination dates.");
+                    ModelState.AddModelError("DateVaccination", "No more than four vaccines can be administered to one client");
                     return View(vaccination);
                 }
                 var lastVacine = vacine.OrderByDescending(v => v.DateVaccination).FirstOrDefault();
