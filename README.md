@@ -13,6 +13,7 @@ Open a project: In Visual Studio, navigate to File > Open > Project/Solution, an
 Installing a migration to update your current database:
 
 Run the following commands in the Package Manager Console to initialize the database:
+
 Add - Migration InitialCreate
 Update-Database
 
@@ -34,6 +35,7 @@ I assumed that the way the vaccines are inserted is according to the order they 
 
  
 client side
+
 When the site is activated, you will be presented with the main window where there are buttons for the different windows
 
 
