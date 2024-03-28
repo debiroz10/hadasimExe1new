@@ -1,17 +1,22 @@
 The Corona Foundation Management System is a project designed for a large hospital fund to manage member data and central information related to the COVID-19 epidemic. The system enables the management of member records, including editing and deletion, and stores essential information such as vaccination records, dates of illness and dates of recovery in a SQL database.
 Prerequisites
+
 Before running the app, make sure you have the following installed:
 NET Core SDK
 SQL Server (or other compatible SQL database)
+
 Installation steps
 Clone the repository: Open the GitHub repository link in your browser and clone the repository to your local computer using Git or GitHub Desktop.
 Open Visual Studio: Start the Visual Studio IDE on your computer.
 Open a project: In Visual Studio, navigate to File > Open > Project/Solution, and select the solution file (.sln) from the cloned repository.
   Build the solution by pressing Ctrl + Shift + B, and then run the application by pressing F5 or clicking the Start button in Visual Studio.
 Installing a migration to update your current database:
+
 Run the following commands in the Package Manager Console to initialize the database:
 Add - Migration InitialCreate
 Update-Database
+
+
 This project relies on the following external services:
 
 Microsoft.AspNetCore.Mvc
@@ -20,10 +25,14 @@ Microsoft.EntityFrameworkCore.SqlServer
 Microsoft.EntityFrameworkCore.Tools
 Microsoft.Extensions.DependencyInjection
 Discounts
+
+
 The system assumes a simplistic model where each member has a single record for vaccination, illness and recovery dates.
 Currently the number of vaccinations is limited to a maximum of four vaccinations per person.
 I assumed that the way the vaccines are inserted is according to the order they were received,
  so tests were added during the creation of the vaccine if the current date is not earlier than the existing date.
+
+ 
 client side
 When the site is activated, you will be presented with the main window where there are buttons for the different windows
 
